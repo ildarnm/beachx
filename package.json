@@ -1,0 +1,12 @@
+{
+  "name": "beachx",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "esbuild": "0.19.2"
+  },
+  "scripts": {
+    "build": "node serve.config.js",
+    "start": "node serve.config.js -w"
+  }
+}
