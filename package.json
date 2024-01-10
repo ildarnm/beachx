@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "esbuild": "0.19.2"
+    "esbuild": "0.19.2",
+    "esbuild-serve": "^1.0.1",
+    "simplex-noise": "^4.0.1"
   },
   "scripts": {
     "build": "node serve.config.js",
