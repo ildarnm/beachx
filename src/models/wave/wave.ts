@@ -1,18 +1,19 @@
 import { WaveLayer } from "./wave-layer";
 import { WAVE_LAYER_COUNT } from "../../constants/wave-layer-count";
+import { LAYER_COLORS } from "../../constants/layer-colors";
 
-const WAVE_LAYERS_DRAWING_DELTA = 20;
+const WAVE_LAYERS_DRAWING_DELTA = 30;
 
 export class Wave {
   #drawingTime = 0;
-  #layer: WaveLayer[] = []
+  #layer: WaveLayer[] = [];
 
   get isWaveCoveredBeach(): boolean {
-      return this.#layer.every(layer => layer.isLayerCoveredBeach)
+    return this.#layer.every(layer => layer.isLayerCoveredBeach)
   }
 
   get isWaveLeftBeach(): boolean {
-      return this.#layer.every(layer => layer.isLayerLeftBeach)
+    return this.#layer.every(layer => layer.isLayerLeftBeach)
   }
 
   constructor(private context: CanvasRenderingContext2D) {
@@ -37,7 +38,7 @@ export class Wave {
 
   #generateWaveLayers() {
     for (let i = 0; i < WAVE_LAYER_COUNT; i++) {
-      this.#layer.push(new WaveLayer(this.context));
+      this.#layer.push(new WaveLayer(this.context, LAYER_COLORS[i] ?? LAYER_COLORS[0]));
     }
   }
 
