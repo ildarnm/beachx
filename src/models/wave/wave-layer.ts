@@ -33,6 +33,10 @@ export class WaveLayer {
     this.#drawLayer();
   }
 
+  drawLayer(): void {
+    this.#drawLayer();
+  }
+
   drawLeaving(): void {
     this.#generateWavePoints();
     this.#leave();
@@ -44,8 +48,8 @@ export class WaveLayer {
     let xoff = 0;
     for (let x = 0; x <= this.context.canvas.width; x += 5) {
       const y = this.noise2D(xoff, this.#yoff);
-      this.#points.push(new WaveFrontPoint(x, (y * 200) + this.delta));
-      xoff += 0.003;
+      this.#points.push(new WaveFrontPoint(x, (y * 100) + this.delta));
+      xoff += 0.005;
     }
     this.#yoff += 0.006;
   }

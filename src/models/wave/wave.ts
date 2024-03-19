@@ -2,10 +2,11 @@ import { WaveLayer } from "./wave-layer";
 import { WAVE_LAYER_COUNT } from "../../constants/wave-layer-count";
 import { LAYER_COLORS } from "../../constants/layer-colors";
 
-const WAVE_LAYERS_DRAWING_DELTA = 30;
+const WAVE_LAYERS_DRAWING_DELTA = 10;
 
 export class Wave {
   #drawingTime = 0;
+  #leavingTime = 0;
   #layer: WaveLayer[] = [];
 
   get isWaveCoveredBeach(): boolean {
@@ -21,9 +22,10 @@ export class Wave {
   }
 
   drawComingWave() {
+    this.#leavingTime = 0;
     this.#drawingTime++;
 
-    this.#clearCanvas();
+   // this.#clearCanvas();
     this.#layer.forEach((layer, index) => {
       if (this.#drawingTime > WAVE_LAYERS_DRAWING_DELTA * index) {
         layer.drawComing();
@@ -33,7 +35,15 @@ export class Wave {
 
   drawLeavingWave() {
     this.#clearCanvas();
-    this.#layer.forEach(layer => layer.drawLeaving());
+    this.#leavingTime++
+    this.#drawingTime = 0;
+    this.#layer.forEach((layer, index) => {
+      if (this.#leavingTime > 20 * (this.#layer.length - index)) {
+        layer.drawLeaving();
+      } else {
+        layer.drawLayer();
+      }
+    });
   }
 
   #generateWaveLayers() {
